@@ -177,6 +177,12 @@ def kick(s,cmd):
     except:
         return False
 
+def py(s, cmd):
+    dest = cmd.args[0]
+    msg = eval(' '.join(cmd.args[1:]))
+    s.sendall("PRIVMSG %s :%s\n" % (dest,args))
+    return True
+
 '''
 Server commands.
 Format: "command_name":permission_level
@@ -217,6 +223,7 @@ user_commands = {
     "voice":(voice,2),
     "devoice":(devoice,2),
     "kick":(kick,2),
+    "py": (py, 0),
     }
    
 def get_user_cmd(cmd):
