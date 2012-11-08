@@ -179,8 +179,11 @@ def kick(s,cmd):
 
 def py(s, cmd):
     dest = cmd.args[0]
-    msg = eval(' '.join(cmd.args[1:]))
-    s.sendall("PRIVMSG %s :%s\n" % (dest, msg))
+    try:
+        msg = eval(' '.join(cmd.args[1:]))
+        s.sendall("PRIVMSG %s :%s\n" % (dest, msg))
+    except Exception as e:
+        s.sendall('PRIVMSG %s :%s\n' % (dest, repr(e)))
     return True
 
 '''
