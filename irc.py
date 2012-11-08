@@ -89,7 +89,7 @@ def parse_irc(s,msg):
     match = re.match(r'.*PING :(\S*)$',msg)
     if match != None:
         return IrcCmd("pong",None,None,[match.group(1)],True)
-    
+
     #search for commands in the format "!command" and check origin
     match = re.match(r':(\S+)!\S+@\S+ PRIVMSG (\S+) :!(.+)',msg)
     if match != None:
@@ -180,7 +180,7 @@ def kick(s,cmd):
 def py(s, cmd):
     dest = cmd.args[0]
     msg = eval(' '.join(cmd.args[1:]))
-    s.sendall("PRIVMSG %s :%s\n" % (dest,args))
+    s.sendall("PRIVMSG %s :%s\n" % (dest, msg))
     return True
 
 '''
@@ -223,9 +223,9 @@ user_commands = {
     "voice":(voice,2),
     "devoice":(devoice,2),
     "kick":(kick,2),
-    "py": (py, 0),
+    "py": (py, 2),
     }
-   
+
 def get_user_cmd(cmd):
     ''' Get command response for user requests  '''
     global user_commands
